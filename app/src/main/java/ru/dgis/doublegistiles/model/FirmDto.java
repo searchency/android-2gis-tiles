@@ -1,10 +1,16 @@
 package ru.dgis.doublegistiles.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class FirmDto {
 
+    @SerializedName("id")
     private long id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("floor")
     private String floor;
+    @SerializedName("main_rubric")
     private String mainRubric;
 
     public FirmDto(long id, String name, String floor, String mainRubric) {
