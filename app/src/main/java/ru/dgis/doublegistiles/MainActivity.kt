@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity() {
         webView.settings.javaScriptEnabled = true
         webView.settings.useWideViewPort = true
         webView.settings.loadWithOverviewMode = true
+        //webView.settings.setSupportZoom(true)
+        //webView.settings.displayZoomControls = true
+        //webView.settings.builtInZoomControls = true
 
         webView.loadUrl("file:///android_asset/map_api.html")
         webView.webViewClient = object : WebViewClient() {

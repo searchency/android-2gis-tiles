@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, height=device-height">
 
     <title></title>
     <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=basic" data-id="dgLoader"></script>
@@ -91,13 +91,15 @@ function initMap(buildingId){
 			DG.then(function() {
 
                 floorWidget = DG.FloorsWidget.init({
-                    width: '100px',
-                    height: '100px',
+                    width: '100%',
+                    height: '100%',
+                    container: 'map',
                     initData: {
                         complexId: buildingId,
                         options: {
                                 locale: 'en_US',
-                                initialZoom: 18
+                                initialZoom: 18,
+                                hideSearchPanel: true
                             }
                     }
                 });
