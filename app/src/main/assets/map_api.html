@@ -81,12 +81,6 @@ var map;
 var isInit = false;
 var floorWidget;
 
-DG.then(function() {
-    return DG.plugin('generalize.js');
-}).then(function(){
-    return DG.plugin('quadtree.js');
-});
-
 function initMap(buildingId){
 			DG.then(function() {
 
@@ -109,11 +103,11 @@ function initMap(buildingId){
 }
 
 function showFirm(firmId){
-    DG.then(function() {
-        floorWidget.showFirm(firmId);
+    floorWidget.showFirm(firmId);
         floorWidget.focusOnFirm(firmId);
-    });
 }
+
+
 </script>
 </body>
 </html>

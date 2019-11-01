@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView.addItemDecoration(divider)
 
         webView = findViewById(R.id.am_webview)
-        webView.visibility = GONE
         //webView.isVerticalScrollBarEnabled = false
         webView.settings.javaScriptEnabled = true
         webView.settings.useWideViewPort = true
@@ -62,16 +61,13 @@ class MainActivity : AppCompatActivity() {
                 val js = "initMap('13933647002593772');" // The Dubai Mall
 
                 webView.evaluateJavascript(js, ValueCallback {
-                    // view.scrollTo(webView.width, 0)
                 })
             }
         }
 
-
         if (savedInstanceState != null) {
             val firmId = savedInstanceState.getLong("firmId", 0)
             if (firmId != 0L) {
-                webView.visibility = VISIBLE
                 recyclerView.visibility = GONE
 
                 webView.loadUrl("javascript:showFirm('$firmId')")
@@ -81,15 +77,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun getFirms() : List<FirmDto> {
         return listOf(FirmDto(70000001006522133, "Officine Panerai", "G", "Clocks / Watches / Accessories"),
-                FirmDto(70000001006682661, "Hour Choice", "1", "Clocks / Watches / Accessories"),
-                FirmDto(70000001033384425, "Montegrappa Italia, LLC", "2", "Clocks / Watches / Accessories"),
                 FirmDto(70000001006524436, "Tissot", "G", "Clocks / Watches / Accessories"),
                 FirmDto(70000001006651406, "TAG Heuer", "G", "Clocks / Watches / Accessories"),
                 FirmDto(70000001031667427, "Rolex Watches", "G", "Clocks / Watches / Accessories"))
     }
 
     fun hideMap() {
-        webView.visibility = GONE
         recyclerView.visibility = VISIBLE
     }
 
@@ -108,12 +101,8 @@ class MainActivity : AppCompatActivity() {
     class RvAdapter(private val inflater: LayoutInflater,
                     private val dto: FirmListDto,
                     private val mainActivity: MainActivity) : RecyclerView.Adapter<FirmSimpleView>() {
-
-
         override fun getItemCount(): Int {
-            return if (dto.items == null) {
-                0
-            } else dto.items!!.size
+            return dto.items.size
         }
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): FirmSimpleView {
@@ -135,7 +124,6 @@ class MainActivity : AppCompatActivity() {
                     transaction.addToBackStack(null)
                     transaction.commitAllowingStateLoss()
 
-                    mainActivity.webView.visibility = VISIBLE
                     mainActivity.recyclerView.visibility = GONE
                     mainActivity.webView.loadUrl("javascript:showFirm('${firmDto.id}')")
                 }
